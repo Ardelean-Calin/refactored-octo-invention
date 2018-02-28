@@ -40,7 +40,7 @@ export default {
         {
           name: "Listă Discipline",
           route: "/subjects",
-          icon: "home"
+          icon: "book"
         },
         {
           name: "Orar",

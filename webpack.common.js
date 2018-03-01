@@ -3,10 +3,17 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
+function resolve(dir) {
+  return path.join(__dirname, "..", dir);
+}
+
 module.exports = {
   entry: "./src/main.js",
   resolve: {
-    extensions: [".js", ".vue"]
+    extensions: [".js", ".vue"],
+    alias: {
+      "@": resolve("src")
+    }
   },
   module: {
     rules: [

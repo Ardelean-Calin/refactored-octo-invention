@@ -1,6 +1,5 @@
 // Stylesheets & artsy stuff
 import "vuetify/dist/vuetify.min.css";
-import colors from "vuetify/es5/util/colors";
 
 // Other dependencies
 import * as firebase from "firebase/app";
@@ -14,26 +13,29 @@ import Vuetify from "vuetify";
 import VueRouter from "vue-router";
 
 // Components
-import Home from "./components/Home.vue";
-import Login from "./components/Login.vue";
-import Signup from "./components/Signup.vue";
-import Schedule from "./components/Schedule.vue";
+import HomePage from "./components/HomePage.vue";
+import LoginPage from "./components/LoginPage.vue";
+import SignupPage from "./components/SignupPage.vue";
+import SchedulePage from "./components/SchedulePage.vue";
 import SubjectList from "./components/SubjectList.vue";
+
+// Initialise firebase
+import firebaseConfig from "../firebaseConfig";
+firebase.initializeApp(firebaseConfig);
 
 Vue.use(VueRouter);
 Vue.use(Vuetify, {
   theme: {
-    primary: colors.brown.base,
-    secondary: colors.green.base
+    primary: "18aa8d"
   }
 });
 
 const routes = [
-  { path: "/", component: Home },
+  { path: "/", component: HomePage },
   { path: "/subjects", component: SubjectList },
-  { path: "/login", component: Login },
-  { path: "/signup", component: Signup },
-  { path: "/schedule", component: Schedule }
+  { path: "/login", component: LoginPage },
+  { path: "/signup", component: SignupPage },
+  { path: "/schedule", component: SchedulePage }
 ];
 
 const router = new VueRouter({

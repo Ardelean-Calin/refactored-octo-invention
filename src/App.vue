@@ -19,9 +19,7 @@
       <v-toolbar-side-icon class="white--text" @click="drawer = !drawer"></v-toolbar-side-icon>
     </v-toolbar>
     <v-content>
-      <v-container fluid fill-height class=".container">
-        <router-view class="view"></router-view>
-      </v-container>
+      <router-view class="view"></router-view>
     </v-content>
   </v-app>
 </template>

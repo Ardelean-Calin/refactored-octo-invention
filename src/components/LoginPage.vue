@@ -1,16 +1,24 @@
 <template>
   <div class="main-container">
     <div class="header">
-      <v-icon size="6rem" dark>person</v-icon>
+      <v-icon 
+        size="6rem" 
+        dark>person</v-icon>
       <h1>Autentificare</h1>
     </div>
     <div class="form-container">
       <v-form>
-        <v-text-field label="E-mail" focus/>
-        <v-text-field label="Parolă" hint="Minim 8 caractere" min="8" 
-        :append-icon="passVisible ? 'visibility_off' : 'visibility'" 
-        :append-icon-cb="() => (passVisible = !passVisible)" 
-        :type="passVisible ? 'text' : 'password'" counter/>
+        <v-text-field 
+          label="E-mail" 
+          focus/>
+        <v-text-field 
+          :append-icon="passVisible ? 'visibility_off' : 'visibility'" 
+          :append-icon-cb="() => (passVisible = !passVisible)" 
+          :type="passVisible ? 'text' : 'password'" 
+          label="Parolă" 
+          hint="Minim 8 caractere" 
+          min="8" 
+          counter/>
       </v-form>
       <v-btn class="primary btn">Autentifică-te</v-btn>
       <a>Nu ai cont? Inregistrează-te</a>

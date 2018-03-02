@@ -60,3 +60,7 @@ typings/
 .env
 
 dist/
+
+firebaseConfig.js
+.firebaserc
+firebase.json

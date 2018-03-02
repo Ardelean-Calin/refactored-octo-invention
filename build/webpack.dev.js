@@ -8,7 +8,7 @@ const webpack = require("webpack");
 module.exports = merge(common, {
   output: {
     filename: "bundle.[hash].js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve("dist")
   },
   module: {
     rules: [
@@ -23,7 +23,7 @@ module.exports = merge(common, {
   },
   devtool: "eval-source-map",
   devServer: {
-    contentBase: "./dist",
+    contentBase: "dist",
     hot: true
   },
   plugins: [

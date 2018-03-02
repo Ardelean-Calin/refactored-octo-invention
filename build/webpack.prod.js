@@ -7,13 +7,14 @@ const webpack = require("webpack");
 
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 
 module.exports = merge(common, {
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve("dist")
   },
   module: {
     rules: [
@@ -27,6 +28,9 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin([path.resolve("dist")], {
+      root: path.resolve("..")
+    }),
     new ExtractTextPlugin("style.css"),
     new UglifyJSPlugin(),
     new BundleAnalyzerPlugin(),

@@ -1,14 +1,13 @@
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 function resolve(dir) {
   return path.join(__dirname, "..", dir);
 }
 
 module.exports = {
-  entry: "./src/main.js",
+  entry: path.resolve("src/main.js"),
   resolve: {
     extensions: [".js", ".vue"],
     alias: {
@@ -19,7 +18,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, "src"),
+        include: path.resolve("..", __dirname, "src"),
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: "babel-loader"
@@ -37,7 +36,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(["dist"]),
     new HtmlWebpackPlugin({
       inject: false,
       template: require("html-webpack-template"),

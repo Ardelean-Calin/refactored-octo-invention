@@ -13,6 +13,7 @@ import Vuetify from "vuetify";
 import VueRouter from "vue-router";
 
 // Components
+import AppShell from "./components/AppShell.vue";
 import HomePage from "./components/HomePage.vue";
 import LoginPage from "./components/LoginPage.vue";
 import SignupPage from "./components/SignupPage.vue";
@@ -30,16 +31,43 @@ Vue.use(Vuetify, {
   }
 });
 
+let signedIn = false;
+const navigationGuard = function(to, from, next) {
+  if (signedIn) next();
+  else next({ path: "/login" });
+};
+
 const routes = [
-  { path: "/", component: HomePage },
-  { path: "/subjects", component: SubjectList },
   { path: "/login", component: LoginPage },
-  { path: "/signup", component: SignupPage },
-  { path: "/schedule", component: SchedulePage }
+  {
+    path: "/",
+    component: AppShell,
+    children: [
+      { path: "", component: HomePage, beforeEnter: navigationGuard },
+      {
+        path: "subjects",
+        component: SubjectList,
+        beforeEnter: navigationGuard
+      },
+      { path: "signup", component: SignupPage, beforeEnter: navigationGuard },
+      {
+        path: "schedule",
+        component: SchedulePage,
+        beforeEnter: navigationGuard
+      }
+    ]
+  }
 ];
 
 const router = new VueRouter({
   routes: routes
+});
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    signedIn = true;
+    router.push("/");
+  }
 });
 
 // eslint-disable-next-line

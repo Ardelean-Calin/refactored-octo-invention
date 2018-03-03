@@ -4,10 +4,10 @@
       <v-icon 
         size="6rem" 
         dark>person</v-icon>
-      <h1>Autentificare</h1>
+      <h1 class="title">Autentificare</h1>
     </div>
     <div class="form-container">
-      <v-form>
+      <v-form class="login-form">
         <v-text-field  
           v-model="email"
           :error-messages="errorMessageEmail"
@@ -28,7 +28,9 @@
         class="primary btn" 
         @click="signIn" 
       >Autentifică-te</v-btn>
-      <a>Nu ai cont? Inregistrează-te</a>
+      <router-link 
+        to="/signup" 
+        class="router-link">Nu ai cont? Inregistrează-te</router-link>
     </div>
   </div>
 </template>
@@ -83,13 +85,16 @@ export default {
 </script>
 
 <style scoped>
-form {
+.btn {
   width: 100%;
-  padding: 1.5rem 0;
 }
 
-a {
-  padding: 0.5rem 0;
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75%;
+  max-width: 20rem;
 }
 
 .header {
@@ -101,13 +106,9 @@ a {
   background: #18aa8d;
 }
 
-h1 {
+.login-form {
   width: 100%;
-  font-size: 2.3rem;
-  text-align: center;
-  color: white;
-  letter-spacing: 0.1px;
-  font-weight: 400;
+  padding: 1.5rem 0;
 }
 
 .main-container {
@@ -119,15 +120,17 @@ h1 {
   background: white;
 }
 
-.form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 75%;
-  max-width: 20rem;
+.router-link {
+  padding: 0.5rem 0;
+  text-decoration: none;
 }
 
-.btn {
+.title {
   width: 100%;
+  font-size: 2.3rem;
+  text-align: center;
+  color: white;
+  letter-spacing: 0.1px;
+  font-weight: 400;
 }
 </style>

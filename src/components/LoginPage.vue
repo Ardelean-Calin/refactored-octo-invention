@@ -8,30 +8,76 @@
     </div>
     <div class="form-container">
       <v-form>
+        <v-text-field  
+          v-model="email"
+          :error-messages="errorMessageEmail"
+          label="E-mail"
+          @input="errorMessageEmail = []"
+        />
         <v-text-field 
-          label="E-mail" 
-          focus/>
-        <v-text-field 
+          v-model="password"
           :append-icon="passVisible ? 'visibility_off' : 'visibility'" 
           :append-icon-cb="() => (passVisible = !passVisible)" 
           :type="passVisible ? 'text' : 'password'" 
+          :error-messages="errorMessagePassword"
           label="Parolă" 
-          hint="Minim 8 caractere" 
-          min="8" 
-          counter/>
+          @input="errorMessagePassword = []"/>
       </v-form>
-      <v-btn class="primary btn">Autentifică-te</v-btn>
+      <v-btn 
+        :disabled="!validInput"
+        class="primary btn" 
+        @click="signIn" 
+      >Autentifică-te</v-btn>
       <a>Nu ai cont? Inregistrează-te</a>
     </div>
   </div>
 </template>
 
 <script>
+import firebase from "firebase/app";
+
+const minPassLength = 8;
+
 export default {
   data: function() {
     return {
-      passVisible: false
+      passVisible: false,
+      email: "",
+      password: "",
+      errorMessageEmail: [],
+      errorMessagePassword: []
     };
+  },
+  computed: {
+    validInput: function() {
+      return this.email.length > 0 && this.password.length >= minPassLength;
+    }
+  },
+  methods: {
+    signIn: function() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .catch(err => {
+          switch (err.code) {
+          case "auth/user-not-found":
+            this.errorMessageEmail = "Acest e-mail nu există";
+            break;
+          case "auth/wrong-password":
+            this.errorMessagePassword = "Parolă greșită";
+            break;
+          case "auth/invalid-email":
+            this.errorMessageEmail = "Format e-mail invalid";
+            break;
+          default:
+            break;
+          }
+        })
+        .then(user => {
+          // User is undefined if login failed.
+          if (user) this.$router.push("/");
+        });
+    }
   }
 };
 </script>

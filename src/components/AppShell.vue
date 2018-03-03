@@ -43,7 +43,7 @@
 
 <script>
 export default {
-  data() {
+  data: function() {
     return {
       drawer: null,
       navigationLinks: [

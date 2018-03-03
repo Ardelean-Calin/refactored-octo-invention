@@ -1,11 +1,57 @@
 <template>
-  <h1>Subject list!</h1>
+  <v-container>
+    <template v-for="subject in subjectData">
+      <subject-card 
+        :title="subject.titlu"
+        :img-src="subject.imgSrc"
+        :to="subject.linkTo"
+        :key="subject.id"
+        class="subject-card"
+      />
+    </template>
+  </v-container>
 </template>
 
 <script>
-export default {};
+import firebase from "firebase/app";
+import SubjectCard from "./SubjectCard";
+
+export default {
+  components: {
+    SubjectCard
+  },
+  data: function() {
+    return {
+      subjects: {}
+    };
+  },
+  computed: {
+    // Ia doar strictul necesar din tot obiectul 'discipline'
+    subjectData: function() {
+      let parsedData = [];
+      Object.entries(this.subjects).map(([key, val]) => {
+        parsedData.push({
+          titlu: val.titlu,
+          imgSrc: val.imageURL,
+          linkTo: "/subjects/" + key
+        });
+      });
+      return parsedData;
+    }
+  },
+  beforeMount() {
+    firebase
+      .database()
+      .ref("/discipline")
+      .on("value", snapshot => {
+        this.subjects = snapshot.val();
+      });
+  }
+};
 </script>
 
 <style scoped>
-
+.subject-card {
+  margin-bottom: 1rem;
+}
 </style>

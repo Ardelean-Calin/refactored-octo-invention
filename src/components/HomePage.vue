@@ -1,5 +1,5 @@
 <template>
-  <h1>Landing Page goes here!</h1>
+  <h1>Home page!</h1>
 </template>
 
 <script>
@@ -7,5 +7,4 @@ export default {};
 </script>
 
 <style scoped>
-
 </style>

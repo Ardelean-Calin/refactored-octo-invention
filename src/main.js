@@ -19,6 +19,7 @@ import LoginPage from "./components/LoginPage.vue";
 import SignupPage from "./components/SignupPage.vue";
 import SchedulePage from "./components/SchedulePage.vue";
 import SubjectList from "./components/SubjectList.vue";
+import SubjectPage from "./components/SubjectPage.vue";
 
 // Initialise firebase
 import firebaseConfig from "../firebaseConfig";
@@ -47,6 +48,11 @@ const routes = [
       {
         path: "subjects",
         component: SubjectList,
+        beforeEnter: navigationGuard
+      },
+      {
+        path: "subjects/:id",
+        component: SubjectPage,
         beforeEnter: navigationGuard
       },
       { path: "signup", component: SignupPage, beforeEnter: navigationGuard },

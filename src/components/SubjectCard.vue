@@ -10,7 +10,7 @@
         height="125px"
       />
       <v-card-title primary-title>
-        <h3>{{ title }}</h3>
+        <div class="title">{{ title }}</div>
       </v-card-title>
     </v-card>
     <span slot="badge">{{ numberNotifications }}</span>

@@ -67,7 +67,7 @@ export default {
             this.errorMessagePassword = "Parolă greșită";
             break;
           case "auth/invalid-email":
-            this.errorMessageEmail = "Format e-mail invalid";
+            this.errorMessageEmail = "Adresă formatată greșit";
             break;
           default:
             break;

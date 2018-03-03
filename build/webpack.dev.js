@@ -21,7 +21,7 @@ module.exports = merge(common, {
       }
     ]
   },
-  devtool: "eval-source-map",
+  devtool: "cheap-module-eval-source-map",
   devServer: {
     contentBase: "dist",
     hot: true

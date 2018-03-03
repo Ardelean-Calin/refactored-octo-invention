@@ -31,7 +31,7 @@ Vue.use(Vuetify, {
   }
 });
 
-let signedIn = false;
+let signedIn = true;
 const navigationGuard = function(to, from, next) {
   if (signedIn) next();
   else next({ path: "/login" });
@@ -64,10 +64,8 @@ const router = new VueRouter({
 });
 
 firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    signedIn = true;
-    router.push("/");
-  }
+  if (user) signedIn = true;
+  else router.push("/login");
 });
 
 // eslint-disable-next-line

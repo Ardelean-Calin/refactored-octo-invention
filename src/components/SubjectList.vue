@@ -18,7 +18,7 @@ import SubjectCard from "./SubjectCard";
 
 export default {
   components: {
-    SubjectCard
+    "subject-card": SubjectCard
   },
   data: function() {
     return {

@@ -12,7 +12,7 @@ import NavigationBar from "./NavigationBar";
 
 export default {
   components: {
-    NavigationBar
+    "navigation-bar": NavigationBar
   }
 };
 </script>

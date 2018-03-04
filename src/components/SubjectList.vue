@@ -54,4 +54,8 @@ export default {
 .subject-card {
   margin-bottom: 1rem;
 }
+
+.subject-card:nth-last-child(1) {
+  margin-bottom: 0;
+}
 </style>

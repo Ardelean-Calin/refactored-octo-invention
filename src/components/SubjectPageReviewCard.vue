@@ -12,7 +12,7 @@
             <v-icon class="review-icon">{{ icon }}</v-icon>
             <div class="headline">{{ title }}</div>
             <div class="date-time">{{ formattedStartDate }}</div>
-            <div class="duration">Durație: {{ duration }} ore</div>
+            <div class="duration">Durată: {{ duration }} ore</div>
           </div>
         </v-flex>
         <v-flex 

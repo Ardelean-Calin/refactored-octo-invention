@@ -10,7 +10,7 @@
         height="125px"
       />
       <v-card-title primary-title>
-        <div class="title">{{ title }}</div>
+        <div class="title mx-auto">{{ title }}</div>
       </v-card-title>
     </v-card>
     <span slot="badge">{{ numberNotifications }}</span>
@@ -47,4 +47,7 @@ export default {
 </script>
 
 <style scoped>
+.title {
+  text-align: center;
+}
 </style>

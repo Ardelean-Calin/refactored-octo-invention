@@ -13,7 +13,7 @@
         <div class="title mx-auto">{{ title }}</div>
       </v-card-title>
     </v-card>
-    <span slot="badge">{{ numberNotifications }}</span>
+    <span slot="badge">{{ badge }}</span>
   </v-badge>
 </template>
 
@@ -28,19 +28,18 @@ export default {
       type: String,
       default: ""
     },
+    badge: {
+      type: Number,
+      default: 0
+    },
     to: {
       type: String,
       default: "/subjects"
     }
   },
-  data: function() {
-    return {
-      numberNotifications: 1
-    };
-  },
   computed: {
     showBadge: function() {
-      return this.numberNotifications > 0;
+      return this.$props.badge > 0;
     }
   }
 };

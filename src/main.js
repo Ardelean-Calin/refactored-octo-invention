@@ -2,9 +2,13 @@
 import "vuetify/dist/vuetify.min.css";
 
 // Other dependencies
+// Firebase
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
+// Offline plugin => No hassle service workers.
+import * as OfflinePluginRuntime from "offline-plugin/runtime";
+OfflinePluginRuntime.install();
 
 // Vue-related imports
 import Vue from "vue";

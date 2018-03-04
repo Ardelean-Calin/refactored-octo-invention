@@ -5,17 +5,13 @@ const common = require("./webpack.common.js");
 
 const webpack = require("webpack");
 
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = merge(common, {
-  output: {
-    filename: "bundle.js",
-    path: path.resolve("dist")
-  },
   module: {
     rules: [
       {

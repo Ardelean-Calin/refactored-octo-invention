@@ -1,17 +1,19 @@
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
-function resolve(dir) {
-  return path.join(__dirname, "..", dir);
-}
+const OfflinePlugin = require("offline-plugin");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
 
 module.exports = {
   entry: path.resolve("src/main.js"),
+  output: {
+    filename: "bundle.[hash].js",
+    path: path.resolve("dist")
+  },
   resolve: {
     extensions: [".js", ".vue"],
     alias: {
-      "@": resolve("src")
+      "@": path.join(__dirname, "..", "src")
     }
   },
   module: {
@@ -37,15 +39,23 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      inject: false,
-      template: require("html-webpack-template"),
-      headHtmlSnippet:
-        "<style>body {font-family: 'Roboto', sans-serif;}</style>",
-      appMountId: "app",
-      links: [
-        "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
-      ],
+      inject: true,
+      template: path.resolve("src/index.html"),
       mobile: true
-    })
+    }),
+    new WebpackPwaManifest({
+      name: "Master SSEA v2",
+      short_name: "SSEAv2",
+      description: "Aplicație mobilă pentru masterul de SSEA.",
+      background_color: "#ffffff",
+      icons: [
+        {
+          src: path.resolve("src/assets/logo.png"),
+          destination: path.join("icons"),
+          sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+        }
+      ]
+    }),
+    new OfflinePlugin()
   ]
 };

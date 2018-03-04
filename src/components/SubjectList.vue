@@ -39,7 +39,7 @@ export default {
       return parsedData;
     }
   },
-  beforeMount() {
+  created() {
     firebase
       .database()
       .ref("/discipline")

@@ -1,7 +1,6 @@
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const OfflinePlugin = require("offline-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 
 module.exports = {
@@ -55,7 +54,6 @@ module.exports = {
           sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
         }
       ]
-    }),
-    new OfflinePlugin()
+    })
   ]
 };

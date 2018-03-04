@@ -9,6 +9,7 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const OfflinePlugin = require("offline-plugin");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = merge(common, {
@@ -34,6 +35,7 @@ module.exports = merge(common, {
       "process.env": {
         NODE_ENV: JSON.stringify("production")
       }
-    })
+    }),
+    new OfflinePlugin()
   ]
 });

@@ -5,14 +5,15 @@
       height="200px"/>
     <v-card-title primary-title>
       <div>
-        <h3 class="title"> {{ title }}</h3>
-        <div class="description">
-          <div
-            @click="showDescription = !showDescription">
+        <h3 class="headline"> {{ title }}</h3>
+        <div 
+          class="description" 
+          @click="showDescription = !showDescription">
+          <div>
             <span class="description-expander-text">Descriere</span> 
             <v-icon 
               :class="{'icon-rotated': showDescription}"
-              class="description-expander-icon" 
+              class="description-expander-icon primary" 
               dark
               small>keyboard_arrow_right
             </v-icon>
@@ -25,35 +26,111 @@
         </div>
       </div>
     </v-card-title>
-    <v-divider/>
+    <v-card-text class="card-text">
+      <h3 class="title">Recenzii</h3>
+      <div 
+        v-if="reviews.length == 0"
+        class="no-reviews" >
+        Nici-o recenzie disponibilă momentan.
+      </div>
+      <div 
+        v-for="review in reviews" 
+        :key="review.id">
+        <review-card 
+          :title="review.shortTitle"
+          :icon="review.icon"
+          :start-date="review.dateStart"
+          :end-date="review.dateEnd"
+          :to="$route.path + '/' + review.linkTo"
+          class="review-card" />
+      </div>
+    </v-card-text>
   </v-card>
 </template>
 
 <script>
 import firebase from "firebase/app";
+import SubjectPageReviewCard from "./SubjectPageReviewCard.vue";
+
 export default {
+  components: {
+    "review-card": SubjectPageReviewCard
+  },
   data: function() {
     return {
       title: "",
       description: "",
       imgSrc: "",
+      subject: {},
+      courses: {},
+      laboratories: {},
+      toReview: [],
+      userID: null,
       showDescription: false
     };
+  },
+  computed: {
+    reviews: function() {
+      const reviewObjects = this.toReview.reduce((accumulator, objectID) => {
+        if (Object.keys(this.courses).includes(objectID)) {
+          accumulator.push({
+            ...this.courses[objectID],
+            icon: "book",
+            linkTo: objectID
+          });
+        } else if (Object.keys(this.laboratories).includes(objectID)) {
+          accumulator.push({
+            ...this.laboratories[objectID],
+            icon: "build",
+            linkTo: objectID
+          });
+        }
+        return accumulator;
+      }, []);
+      return reviewObjects;
+    }
+  },
+  watch: {
+    subject: function(val) {
+      this.title = val.titlu;
+      this.description = val.descriere;
+      this.imgSrc = val.imageURL;
+
+      this.courses = val.cursuri;
+      this.laboratories = val.laboratoare;
+    }
   },
   created: function() {
     firebase
       .database()
       .ref("/discipline/" + this.$route.params.id)
       .on("value", snapshot => {
-        this.title = snapshot.val().titlu;
-        this.description = snapshot.val().descriere;
-        this.imgSrc = snapshot.val().imageURL;
+        this.subject = snapshot.val();
       });
+
+    firebase.auth().onAuthStateChanged(user => {
+      this.userID = user.uid;
+      firebase
+        .database()
+        .ref("/users/" + this.userID)
+        .on("value", snapshot => {
+          let toReview = [];
+          snapshot.child("toReview").forEach(snap => {
+            if (snap.val()) toReview.push(snap.key);
+          });
+          this.toReview = toReview;
+          this.$forceUpdate();
+        });
+    });
   }
 };
 </script>
 
 <style scoped>
+.card-text {
+  padding-top: 0rem;
+}
+
 .description {
   cursor: pointer;
   padding-top: 0.5rem;
@@ -66,7 +143,6 @@ export default {
 }
 
 .description-expander-icon {
-  background-color: #18aa8d;
   border-radius: 50%;
   margin-bottom: 2px;
   padding: 2px;
@@ -89,5 +165,19 @@ export default {
 .icon-rotated {
   -moz-transform: rotate(90deg);
   transform: rotate(90deg);
+}
+
+.no-reviews {
+  padding-top: 0.5rem;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.review-card {
+  margin-top: 1rem;
+}
+
+.title {
+  /* font-weight: 600; */
 }
 </style>

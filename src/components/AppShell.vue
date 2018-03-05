@@ -1,10 +1,8 @@
 <template>
-  <div>
+  <v-content>
     <navigation-bar/>
-    <v-content>
-      <router-view/>
-    </v-content>
-  </div>
+    <router-view/>
+  </v-content>
 </template>
 
 <script>
@@ -18,9 +16,4 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
 </style>

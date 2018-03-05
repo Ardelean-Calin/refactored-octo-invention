@@ -1,7 +1,6 @@
 <template>
   <v-badge 
     v-model="showBadge"
-    color="green"
     right
     overlap>
     <v-card :to="to">

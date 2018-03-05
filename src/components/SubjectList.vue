@@ -88,6 +88,12 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .subject-card {
   margin-bottom: 1rem;
 }

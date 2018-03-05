@@ -176,8 +176,4 @@ export default {
 .review-card {
   margin-top: 1rem;
 }
-
-.title {
-  /* font-weight: 600; */
-}
 </style>

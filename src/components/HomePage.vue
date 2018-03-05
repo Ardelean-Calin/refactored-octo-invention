@@ -12,6 +12,7 @@
         <v-card-text class="news-card-text">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, soluta? 😊
         </v-card-text>
+        <div class="author">Ardelean Călin</div>
         <v-card-actions class="card-action-buttons">
           <v-spacer/>
           <v-btn icon>
@@ -127,12 +128,26 @@ export default {
 </script>
 
 <style scoped>
+.author {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+  font-size: larger;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 40%;
+}
+
 .headline {
   color: rgba(0, 0, 0, 0.7);
   font-weight: 700;
 }
 
 .card-action-buttons {
+  /* display: inline-block; */
   position: absolute;
   right: 0px;
   bottom: 0px;

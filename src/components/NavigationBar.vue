@@ -2,6 +2,7 @@
   <div>
     <v-navigation-drawer 
       v-model="drawer"
+      fixed
       app 
     >
       <v-divider/>
@@ -30,6 +31,7 @@
     </v-navigation-drawer>
     <v-toolbar 
       app 
+      fixed
       color="primary">
       <v-toolbar-side-icon 
         class="white--text" 

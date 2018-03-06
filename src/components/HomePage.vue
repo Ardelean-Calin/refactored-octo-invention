@@ -132,8 +132,8 @@ export default {
   position: absolute;
   left: 1rem;
   bottom: 1rem;
-  color: rgba(0, 0, 0, 0.5);
-  font-weight: 600;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 500;
   font-size: larger;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -143,7 +143,7 @@ export default {
 
 .headline {
   color: rgba(0, 0, 0, 0.7);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .card-action-buttons {
@@ -163,6 +163,6 @@ export default {
 
 .title-text {
   color: rgba(0, 0, 0, 0.65);
-  font-weight: 600;
+  font-weight: 500;
 }
 </style>

@@ -32,7 +32,7 @@ firebase.initializeApp(firebaseConfig);
 Vue.use(VueRouter);
 Vue.use(Vuetify, {
   theme: {
-    primary: "18aa8d"
+    primary: "16a085"
   }
 });
 

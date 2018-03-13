@@ -1,33 +1,11 @@
 <template>
   <div 
-    class="news-container primary" 
-    style="padding: 1rem; padding-bottom: 2.5rem">
+    class="news-container primary">
     <v-card 
-      height="100%" >
-      <v-card-title primary-title>
-        <h3 class="headline headline-news">Anunțuri</h3>
+      height="100%"
+      class="news-card">
+      <v-card-title  v-if="!editMode" >
       </v-card-title>
-      <v-divider/>
-      <v-dialog 
-        v-model="showDialog" 
-        max-width="290">
-        <v-card>
-          <v-card-title class="headline">Sunteți sigur(ă)?</v-card-title>
-          <v-card-text>Odată trimis, anunțul va apărea pe dispozitivele tuturor colegilor care au aplicația.</v-card-text>
-          <v-card-actions>
-            <v-spacer/>
-            <v-btn 
-              color="red darken-1" 
-              flat
-              @click="showDialog = false">Renunță</v-btn>
-            <v-btn 
-              color="green darken-1" 
-              flat
-              @click="submitNews">Trimite</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
       <div
         v-if="editMode"
         class="editDiv">
@@ -37,7 +15,6 @@
           :append-icon-cb="() => newsEditedText = ''"
           v-model="newsEditedText"
           label="Introduceți un anunț nou"
-          rows="3"
           append-icon="close"
           multi-line
         />
@@ -47,13 +24,15 @@
         class="news-card-text">
         {{ newsText }}
       </v-card-text>
-      <div 
-        v-if="!editMode" 
-        class="author">{{ newsAuthor }}</div>
-      <div 
-        v-if="!editMode" 
-        class="postdate">{{ newsDate }} </div>
-      <v-card-actions class="card-action-buttons">
+      <v-card-actions class="card-action-buttons"> 
+        <div class="footer-div">
+          <div 
+            v-if="!editMode" 
+            class="author">{{ newsAuthor }}</div>
+          <div 
+            v-if="!editMode" 
+            class="postdate">{{ newsDate }} </div>
+        </div>      
         <v-spacer/>
         <v-btn 
           v-if="editMode"
@@ -76,6 +55,26 @@
         </v-btn>
       </v-card-actions>
     </v-card>
+    <v-dialog 
+      v-model="showDialog" 
+      max-width="290">
+      <v-card>
+        <v-card-title class="headline">Sunteți sigur(ă)?</v-card-title>
+        <v-card-text>Odată trimis, anunțul va apărea pe dispozitivele tuturor colegilor care au aplicația.</v-card-text>
+        <v-card-actions>
+          <v-spacer/>
+          <v-btn 
+            color="red darken-1" 
+            flat
+            outline
+            @click="showDialog = false">Renunță</v-btn>
+          <v-btn 
+            color="primary" 
+            depressed
+            @click="submitNews">Trimite</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -135,31 +134,34 @@ export default {
 
 <style scoped>
 .author {
-  position: absolute;
-  left: 1rem;
-  bottom: 2rem;
   color: rgba(0, 0, 0, 0.6);
-  font-weight: 500;
+  font-weight: 700;
   font-size: larger;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 50%;
 }
 
 .editDiv {
   padding: 0.5rem 1rem;
+  padding-bottom: 0;
 }
 
 .postdate {
-  position: absolute;
-  left: 1rem;
-  bottom: 0.7rem;
   color: rgba(0, 0, 0, 0.6);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.news-card {
+  position: relative;
 }
 
 .news-container {
   height: 21rem;
+  padding: 1rem;
+  padding-bottom: 2.5rem;
 }
 
 .news-card-text {
@@ -167,17 +169,16 @@ export default {
   font-size: larger;
   max-height: 8.5rem;
   overflow: auto;
-}
-
-.headline-news {
-  color: rgba(0, 0, 0, 0.7);
-  /* font-weight: 600; */
+  padding-top: 0;
 }
 
 .card-action-buttons {
   /* display: inline-block; */
   position: absolute;
-  right: 0px;
+  left: 0px;
   bottom: 0px;
+  padding: 0.8rem;
+  width: 100%;
+  background: hsl(0, 0%, 97%);
 }
 </style>

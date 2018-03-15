@@ -4,19 +4,23 @@
     <v-card 
       height="100%"
       class="news-card">
-      <v-card-title  v-if="!editMode" >
-      </v-card-title>
+      <v-card-title v-if="!editMode" />
       <div
         v-if="editMode"
         class="editDiv">
         <v-text-field
           :counter="140"
-          :rules="[(v) => v.length <= 140 || 'Max 140 de caractere']"
-          :append-icon-cb="() => newsEditedText = ''"
-          v-model="newsEditedText"
+          :rules="[(v) => {
+            if(v)
+              return v.length <= 140 || 'Max 140 de caractere'
+            else
+              return true
+          }]"
+          v-model="editText"
           label="Introduceți un anunț nou"
-          append-icon="close"
+          clearable
           multi-line
+          no-resize
         />
       </div>
       <v-card-text 
@@ -89,10 +93,13 @@ export default {
       newsText: "",
       newsAuthor: "",
       date: "",
-      newsEditedText: ""
+      editText: ""
     };
   },
   computed: {
+    newsEditedText: function() {
+      return this.editText || "";
+    },
     newsDate: function() {
       return new Date(this.date).toLocaleString("ro-RO", {
         day: "2-digit",
@@ -135,7 +142,7 @@ export default {
 <style scoped>
 .author {
   color: rgba(0, 0, 0, 0.6);
-  font-weight: 700;
+  font-weight: 500;
   font-size: larger;
   text-overflow: ellipsis;
   white-space: nowrap;

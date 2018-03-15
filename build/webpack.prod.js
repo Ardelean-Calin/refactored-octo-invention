@@ -30,7 +30,7 @@ module.exports = merge(common, {
     }),
     new ExtractTextPlugin("style.css"),
     new UglifyJSPlugin(),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("production")

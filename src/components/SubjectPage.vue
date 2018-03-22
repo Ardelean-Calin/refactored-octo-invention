@@ -76,13 +76,13 @@ export default {
           accumulator.push({
             ...this.courses[objectID],
             icon: "book",
-            linkTo: objectID
+            linkTo: "cursuri/" + objectID
           });
         } else if (Object.keys(this.laboratories).includes(objectID)) {
           accumulator.push({
             ...this.laboratories[objectID],
             icon: "build",
-            linkTo: objectID
+            linkTo: "laboratoare/" + objectID
           });
         }
         return accumulator;
@@ -91,13 +91,16 @@ export default {
     }
   },
   watch: {
-    subject: function(val) {
-      this.title = val.titlu;
-      this.description = val.descriere;
-      this.imgSrc = val.imageURL;
+    subject: {
+      handler: function(val) {
+        this.title = val.titlu;
+        this.description = val.descriere;
+        this.imgSrc = val.imageURL;
 
-      this.courses = val.cursuri;
-      this.laboratories = val.laboratoare;
+        this.courses = val.cursuri;
+        this.laboratories = val.laboratoare;
+      },
+      deep: true
     }
   },
   created: function() {
